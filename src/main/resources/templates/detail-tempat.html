@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Detail Tempat</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+<div class="navbar">
+
+    <a href="/dashboard">Dashboard</a>
+
+    <a href="/tempat">Tempat</a>
+
+    <a href="/favorit">Favorit</a>
+
+    <a href="/event">Event</a>
+
+    <a href="/logout">Logout</a>
+
+</div>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1 class="title">
+            ☕ Detail Tempat Nongkrong
+        </h1>
+
+        <hr><br>
+
+        <h2 th:text="${tempat.nama_tempat}">
+            Nama Tempat
+        </h2>
+
+        <p style="color:gray;">
+            📍 <span th:text="${tempat.alamat}"></span>
+        </p>
+
+        <br>
+
+        <h3>📂 Kategori</h3>
+
+        <p th:text="${tempat.kategori}">
+            Cafe
+        </p>
+
+        <br>
+
+        <h3>📝 Deskripsi</h3>
+
+        <p th:text="${tempat.deskripsi}">
+            Deskripsi Tempat
+        </p>
+
+        <br>
+
+        <h3>🕒 Jam Operasional</h3>
+
+        <p>
+            <b>Buka :</b>
+            <span th:text="${tempat.jam_buka}"></span>
+        </p>
+
+        <p>
+            <b>Tutup :</b>
+            <span th:text="${tempat.jam_tutup}"></span>
+        </p>
+
+        <br>
+
+        <h3>⭐ Rating</h3>
+
+        <p>
+            ⭐⭐⭐⭐⭐
+        </p>
+
+        <p>
+            Belum ada perhitungan rating rata-rata.
+        </p>
+
+        <br>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+
+            <a class="btn"
+               th:href="@{/review/{id}(id=${tempat.id_tempat})}">
+                💬 Lihat Review
+            </a>
+
+            <a class="btn"
+               th:href="@{/favorit/tambah/{id}(id=${tempat.id_tempat})}">
+                ❤️ Tambah Favorit
+            </a>
+
+            <a class="btn"
+               href="/tempat">
+                ← Kembali
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

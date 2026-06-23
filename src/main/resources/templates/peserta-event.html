@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Peserta Event</title>
+</head>
+<body>
+
+<h1>Peserta Event</h1>
+
+<p>
+    Event :
+    <span th:text="${event != null ? event.nama_event : 'Tidak ada event'}"></span>
+</p>
+
+<hr>
+
+<table border="1" cellpadding="10">
+
+    <tr>
+        <th>ID Peserta</th>
+        <th>Nama User</th>
+        <th>Email</th>
+    </tr>
+
+    <tr th:each="peserta : ${pesertaList}">
+        <td th:text="${peserta.id_peserta}"></td>
+        <td th:text="${peserta.user != null ? peserta.user.nama : '-'}"></td>
+        <td th:text="${peserta.user != null ? peserta.user.email : '-'}"></td>
+    </tr>
+
+</table>
+
+<br>
+
+<a href="/event">
+    Kembali
+</a>
+
+</body>
+</html>

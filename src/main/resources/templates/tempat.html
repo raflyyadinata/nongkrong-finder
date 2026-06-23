@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Daftar Tempat</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+<div class="navbar">
+
+    <a href="/dashboard">Dashboard</a>
+
+    <a href="/tempat">Tempat</a>
+
+    <a href="/favorit">Favorit</a>
+
+    <a href="/event">Event</a>
+
+    <a href="/logout">Logout</a>
+
+</div>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1 class="title">
+            ☕ Daftar Tempat Nongkrong
+        </h1>
+
+        <p>
+            Temukan dan kelola tempat nongkrong favoritmu.
+        </p>
+
+        <br>
+
+        <a class="btn" href="/tempat/tambah">
+            ➕ Tambah Tempat
+        </a>
+
+    </div>
+
+    <br>
+
+    <div th:each="tempat : ${tempatList}" class="card">
+
+        <h2 th:text="${tempat.nama_tempat}">
+            Nama Tempat
+        </h2>
+
+        <p>
+            📍
+            <span th:text="${tempat.alamat}"></span>
+        </p>
+
+        <p>
+            📂
+            <span th:text="${tempat.kategori}"></span>
+        </p>
+
+        <br>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+
+            <a class="btn"
+               th:href="@{'/tempat/detail/' + ${tempat.id_tempat}}">
+                🔍 Detail
+            </a>
+
+            <a class="btn"
+               th:href="@{'/tempat/edit/' + ${tempat.id_tempat}}">
+                ✏️ Edit
+            </a>
+
+            <a class="btn"
+               th:href="@{'/review/' + ${tempat.id_tempat}}">
+                ⭐ Review
+            </a>
+
+            <a class="btn"
+               th:href="@{'/favorit/tambah/' + ${tempat.id_tempat}}">
+                ❤️ Favorit
+            </a>
+
+            <a class="btn"
+               th:href="@{'/tempat/hapus/' + ${tempat.id_tempat}}">
+                🗑️ Hapus
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

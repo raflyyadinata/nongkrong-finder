@@ -1,0 +1,305 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f3f4f6;
+    color:#1f2937;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+    background:#1f2937;
+    padding:18px 40px;
+    display:flex;
+    gap:30px;
+    align-items:center;
+}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+.navbar a:hover{
+    color:#f59e0b;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    width:90%;
+    max-width:1500px;
+    margin:30px auto;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+    background:white;
+    padding:22px;
+    border-radius:15px;
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+    margin-bottom:20px;
+}
+
+.title{
+    color:#1f2937;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#6b7280;
+    margin-bottom:20px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn{
+    display:inline-block;
+    background:#f59e0b;
+    color:white;
+    text-decoration:none;
+    padding:12px 18px;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:#d97706;
+}
+
+.btn-danger{
+    background:#dc2626;
+}
+
+.btn-danger:hover{
+    background:#b91c1c;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+table th{
+    background:#1f2937;
+    color:white;
+    padding:15px;
+    text-align:left;
+}
+
+table td{
+    padding:15px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+/* =========================
+   FORM
+========================= */
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:12px;
+    margin-top:6px;
+    margin-bottom:15px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    outline:none;
+    border-color:#f59e0b;
+}
+
+/* =========================
+   HERO DASHBOARD
+========================= */
+
+.hero{
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.hero h1{
+    margin-bottom:10px;
+}
+
+.hero p{
+    color:#6b7280;
+}
+
+/* =========================
+   STAT CARD
+========================= */
+
+.stats{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.stat-box{
+    flex:1;
+    min-width:180px;
+    background:#f9fafb;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.stat-box h3{
+    margin-bottom:10px;
+}
+
+.stat-number{
+    font-size:36px;
+    font-weight:bold;
+    color:#f59e0b;
+}
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.action-group{
+    margin-top:15px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+/* =========================
+   TEMPAT CARD
+========================= */
+
+.tempat-card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+    margin-bottom:20px;
+}
+
+.tempat-card h2{
+    margin-bottom:10px;
+}
+
+.tempat-card p{
+    margin-bottom:5px;
+}
+
+/* =========================
+   EVENT CARD
+========================= */
+
+.event-card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+    margin-bottom:20px;
+}
+
+.event-card h2{
+    margin-bottom:10px;
+}
+
+.event-card p{
+    margin-bottom:8px;
+}
+
+/* =========================
+   FAVORIT CARD
+========================= */
+
+.favorit-card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+    margin-bottom:20px;
+}
+
+/* =========================
+   DETAIL PAGE
+========================= */
+
+.detail-item{
+    margin-bottom:18px;
+}
+
+.detail-item h3{
+    margin-bottom:5px;
+    color:#374151;
+}
+
+/* =========================
+   REVIEW
+========================= */
+
+.review-box{
+    background:#f9fafb;
+    border-left:5px solid #f59e0b;
+    padding:15px;
+    margin-top:15px;
+    border-radius:8px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    .navbar{
+        flex-wrap:wrap;
+        gap:15px;
+    }
+
+    .container{
+        width:95%;
+    }
+
+    .stats{
+        flex-direction:column;
+    }
+
+    .action-group{
+        flex-direction:column;
+    }
+
+    .btn{
+        width:100%;
+        text-align:center;
+    }
+}

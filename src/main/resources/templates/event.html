@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Daftar Event</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+<div class="navbar">
+
+    <a href="/dashboard">Dashboard</a>
+
+    <a href="/tempat">Tempat</a>
+
+    <a href="/favorit">Favorit</a>
+
+    <a href="/event">Event</a>
+
+</div>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1 class="title">
+            🎉 Daftar Event Nongkrong
+        </h1>
+
+        <p class="subtitle">
+            Temukan dan ikuti event nongkrong yang sedang berlangsung.
+        </p>
+
+        <a class="btn" href="/event/tambah">
+            ➕ Tambah Event
+        </a>
+
+    </div>
+
+    <div th:each="event : ${eventList}" class="card">
+
+        <h2 th:text="${event.nama_event}"></h2>
+
+        <p>
+            📍
+            <span th:text="${event.lokasi}"></span>
+        </p>
+
+        <p>
+            📢 Status :
+            <strong th:text="${event.status}"></strong>
+        </p>
+
+        <div style="margin-top:15px;">
+
+            <a class="btn"
+               th:href="@{'/event/join/' + ${event.id_event}}">
+                🙋 Join Event
+            </a>
+
+            <a class="btn"
+               th:href="@{'/event/peserta/' + ${event.id_event}}">
+                👥 Peserta
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

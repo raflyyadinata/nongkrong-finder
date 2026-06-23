@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Edit Tempat</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1 class="title">
+            Edit Tempat Nongkrong
+        </h1>
+
+        <form action="/tempat/update" method="post">
+
+            <input type="hidden"
+                   name="id_tempat"
+                   th:value="${tempat.id_tempat}">
+
+            <label>Nama Tempat</label>
+            <input type="text"
+                   name="nama_tempat"
+                   th:value="${tempat.nama_tempat}">
+
+            <label>Alamat</label>
+            <input type="text"
+                   name="alamat"
+                   th:value="${tempat.alamat}">
+
+            <label>Deskripsi</label>
+            <textarea name="deskripsi"
+                      th:text="${tempat.deskripsi}">
+            </textarea>
+
+            <label>Kategori</label>
+            <input type="text"
+                   name="kategori"
+                   th:value="${tempat.kategori}">
+
+            <label>Jam Buka</label>
+            <input type="text"
+                   name="jam_buka"
+                   th:value="${tempat.jam_buka}">
+
+            <label>Jam Tutup</label>
+            <input type="text"
+                   name="jam_tutup"
+                   th:value="${tempat.jam_tutup}">
+
+            <label>Foto</label>
+            <input type="text"
+                   name="foto"
+                   th:value="${tempat.foto}">
+
+            <button class="btn" type="submit">
+                Update Tempat
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

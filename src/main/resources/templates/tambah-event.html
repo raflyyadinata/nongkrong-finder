@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Tambah Event</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1 class="title">
+            Tambah Event Baru
+        </h1>
+
+        <form action="/event/simpan" method="post">
+
+            <label>Nama Event</label>
+            <input type="text" name="nama_event">
+
+            <label>Deskripsi</label>
+            <textarea name="deskripsi"></textarea>
+
+            <label>Lokasi</label>
+            <input type="text" name="lokasi">
+
+            <label>Maks Peserta</label>
+            <input type="number" name="maks_peserta">
+
+            <label>Status</label>
+            <input type="text" name="status">
+
+            <button class="btn" type="submit">
+                Simpan Event
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

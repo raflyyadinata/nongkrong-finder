@@ -11,20 +11,31 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_user;
 
+    @Column(nullable = false)
     private String nama;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
-    private String role;
+    @Column(nullable = false, length = 10)
+    private String role = "USER";
 
     private String foto_profil;
 
     private LocalDateTime created_at;
 
-    // Getter dan Setter
+    public User() {
+    }
+
+    public User(String nama, String email, String password) {
+        this.nama = nama;
+        this.email = email;
+        this.password = password;
+        this.role = "USER";
+    }
 
     public Long getId_user() {
         return id_user;
@@ -85,5 +96,9 @@ public class User {
     @PrePersist
     public void prePersist() {
         this.created_at = LocalDateTime.now();
+
+        if (this.role == null || this.role.isEmpty()) {
+            this.role = "USER";
+        }
     }
 }

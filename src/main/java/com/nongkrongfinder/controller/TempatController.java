@@ -16,14 +16,53 @@ public class TempatController {
     private TempatRepository tempatRepository;
 
     @GetMapping("/tempat")
-    public String daftarTempat(Model model) {
-
-        List<Tempat> tempatList = tempatRepository.findAll();
-
+    public String daftarTempat(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String sort,
+            Model model
+    ) {
+    
+        List<Tempat> tempatList;
+    
+        if (keyword != null && !keyword.trim().isEmpty()) {
+    
+            tempatList = tempatRepository.search(keyword);
+    
+        } else {
+    
+            tempatList = tempatRepository.findAll();
+    
+        }
+    
+        // Sort
+        if ("nama_asc".equals(sort)) {
+            tempatList.sort(
+                (a, b) -> a.getNama_tempat()
+                        .compareToIgnoreCase(b.getNama_tempat())
+            );
+        }
+    
+        if ("nama_desc".equals(sort)) {
+            tempatList.sort(
+                (a, b) -> b.getNama_tempat()
+                        .compareToIgnoreCase(a.getNama_tempat())
+            );
+        }
+    
+        if ("kategori".equals(sort)) {
+            tempatList.sort(
+                (a, b) -> a.getKategori()
+                        .compareToIgnoreCase(b.getKategori())
+            );
+        }
+    
         model.addAttribute("tempatList", tempatList);
-
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("sort", sort);
+    
         return "tempat";
     }
+
 
     @GetMapping("/tempat/tambah")
     public String formTambahTempat(Model model) {
@@ -76,4 +115,6 @@ public class TempatController {
 
         return "redirect:/tempat";
     }
+
+   
 }

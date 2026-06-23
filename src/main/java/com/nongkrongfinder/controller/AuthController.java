@@ -17,89 +17,108 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class AuthController {
 
-    @Autowired
-    private UserService userService;
 
-    @Autowired
-    private TempatRepository tempatRepository;
+@Autowired
+private UserService userService;
 
-    @Autowired
-    private FavoritRepository favoritRepository;
+@Autowired
+private TempatRepository tempatRepository;
 
-    @Autowired
-    private EventRepository eventRepository;
+@Autowired
+private FavoritRepository favoritRepository;
 
-    @Autowired
-    private ReviewRepository reviewRepository;
+@Autowired
+private EventRepository eventRepository;
 
-    @GetMapping("/register")
-    public String registerPage() {
-        return "register";
+@Autowired
+private ReviewRepository reviewRepository;
+
+// ================= HOME =================
+
+@GetMapping("/")
+public String home() {
+    return "redirect:/dashboard";
+}
+
+// ================= REGISTER =================
+
+@GetMapping("/register")
+public String registerPage() {
+    return "register";
+}
+
+@PostMapping("/register")
+public String register(User user) {
+
+    user.setRole("USER");
+
+    userService.register(user);
+
+    return "redirect:/login";
+}
+
+// ================= LOGIN =================
+
+@GetMapping("/login")
+public String loginPage() {
+    return "login";
+}
+
+@PostMapping("/login")
+public String login(
+        @RequestParam String email,
+        @RequestParam String password,
+        HttpSession session
+) {
+
+    User user = userService.login(email, password);
+
+    if (user == null) {
+        return "redirect:/login?error";
     }
 
-    @PostMapping("/register")
-    public String register(User user) {
+    session.setAttribute("user", user);
+    session.setAttribute("role", user.getRole());
 
-        userService.register(user);
+    return "redirect:/dashboard";
+}
 
-        return "redirect:/login";
-    }
+// ================= DASHBOARD =================
 
-    @GetMapping("/login")
-    public String loginPage() {
-        return "login";
-    }
+@GetMapping("/dashboard")
+public String dashboard(
+        Model model,
+        HttpSession session
+) {
 
-    @PostMapping("/login")
-    public String login(
-            @RequestParam String email,
-            @RequestParam String password,
-            HttpSession session
-    ) {
+    User user = (User) session.getAttribute("user");
 
-        User user = userService.login(email, password);
+    model.addAttribute("user", user);
 
-        if (user != null) {
+    model.addAttribute("jumlahTempat",
+            tempatRepository.count());
 
-            session.setAttribute("user", user);
+    model.addAttribute("jumlahFavorit",
+            favoritRepository.count());
 
-            return "redirect:/dashboard";
-        }
+    model.addAttribute("jumlahEvent",
+            eventRepository.count());
 
-        return "redirect:/login";
-    }
+    model.addAttribute("jumlahReview",
+            reviewRepository.count());
 
-    @GetMapping("/dashboard")
-    public String dashboard(Model model) {
+    return "dashboard";
+}
 
-        model.addAttribute(
-                "jumlahTempat",
-                tempatRepository.count()
-        );
+// ================= LOGOUT =================
 
-        model.addAttribute(
-                "jumlahFavorit",
-                favoritRepository.count()
-        );
+@GetMapping("/logout")
+public String logout(HttpSession session) {
 
-        model.addAttribute(
-                "jumlahEvent",
-                eventRepository.count()
-        );
+    session.invalidate();
 
-        model.addAttribute(
-                "jumlahReview",
-                reviewRepository.count()
-        );
+    return "redirect:/dashboard";
+}
 
-        return "dashboard";
-    }
 
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-
-        session.invalidate();
-
-        return "redirect:/login";
-    }
 }

@@ -14,25 +14,102 @@
 <body class="bg-gray-50 text-gray-900">
 
     <!-- NAVBAR -->
-    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="bg-amber-500 text-white p-2.5 rounded-xl shadow-lg shadow-amber-500/20">
-                    <i class="fa-solid fa-mug-hot text-xl"></i>
-                </div>
-                <span class="text-xl font-bold tracking-tight text-gray-900">Nongkrong<span class="text-amber-500">Finder</span></span>
-            </div>
-            <div class="hidden md:flex items-center gap-8 font-medium text-gray-600">
-                <a href="/dashboard" class="hover:text-amber-500 transition-colors">Dashboard</a>
-                <a href="/tempat" class="hover:text-amber-500 transition-colors">Tempat</a>
-                <a href="/favorit" class="text-amber-500 transition-colors">Favorit</a>
-                <a href="/event" class="hover:text-amber-500 transition-colors">Event</a>
-            </div>
-            <div class="flex items-center gap-4">
-                <a href="/logout" class="bg-gray-900 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-gray-800 transition-all text-sm">Logout</a>
-            </div>
+    <nav
+    class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100"
+  >
+    <div
+      class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center"
+    >
+      <!-- Logo -->
+      <div class="flex items-center gap-3">
+        <div
+          class="bg-amber-500 text-white p-2.5 rounded-xl shadow-lg shadow-amber-500/20"
+        >
+          <i class="fa-solid fa-mug-hot text-xl"></i>
         </div>
-    </nav>
+
+        <span class="text-xl font-bold tracking-tight text-gray-900">
+          Nongkrong<span class="text-amber-500">Finder</span>
+        </span>
+      </div>
+
+      <!-- Menu -->
+      <div
+        class="hidden md:flex items-center gap-8 font-medium text-gray-600"
+      >
+        <a href="/dashboard" class="text-amber-500 transition-colors">
+          Dashboard
+        </a>
+
+        <a href="/tempat" class="hover:text-amber-500 transition-colors">
+          Tempat
+        </a>
+
+        <a href="/event" class="hover:text-amber-500 transition-colors">
+          Event
+        </a>
+
+        <!-- Hanya tampil jika sudah login -->
+        <a
+          th:if="${session.user != null}"
+          href="/favorit"
+          class="hover:text-amber-500 transition-colors"
+        >
+          Favorit
+        </a>
+
+        <!-- Hanya Admin -->
+        <a
+          th:if="${session.role == 'ADMIN'}"
+          href="/admin/user"
+          class="hover:text-amber-500 transition-colors"
+        >
+          Kelola User
+        </a>
+      </div>
+
+      <!-- Tombol Kanan -->
+      <div class="flex items-center gap-3">
+        <!-- Guest -->
+        <div th:if="${session.user == null}" class="flex gap-3">
+          <a
+            href="/login"
+            class="bg-amber-500 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-amber-600 transition-all text-sm"
+          >
+            Login
+          </a>
+
+          <a
+            href="/register"
+            class="border border-gray-300 px-5 py-2.5 rounded-xl font-semibold hover:bg-gray-100 transition-all text-sm"
+          >
+            Register
+          </a>
+        </div>
+
+        <!-- User/Admin -->
+        <div th:if="${session.user != null}" class="flex items-center gap-3">
+          <span class="text-sm font-semibold text-gray-700">
+            <span th:text="${session.user.nama}"></span>
+          </span>
+
+          <span
+            th:if="${session.role == 'ADMIN'}"
+            class="bg-red-500 text-white text-xs px-2 py-1 rounded-full"
+          >
+            ADMIN
+          </span>
+
+          <a
+            href="/logout"
+            class="bg-gray-900 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-gray-800 transition-all text-sm"
+          >
+            Logout
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
 
     <!-- MAIN BODY -->
     <main class="max-w-5xl mx-auto px-4 py-10">

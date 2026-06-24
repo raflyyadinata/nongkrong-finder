@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "tempat")
 public class Tempat {
 
+    private String status;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_tempat;
@@ -24,6 +26,7 @@ public class Tempat {
     private String jam_tutup;
 
     private String foto;
+    
 
     public Long getId_tempat() {
         return id_tempat;
@@ -87,5 +90,13 @@ public class Tempat {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

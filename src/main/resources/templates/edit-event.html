@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Event - NongkrongFinder</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
+
+<div class="max-w-xl w-full mx-auto my-12 px-4 flex-1 flex flex-col justify-center">
+
+    <div class="bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-xl space-y-6">
+
+        <!-- HEADER -->
+        <div class="text-center space-y-2">
+
+            <div class="w-12 h-12 bg-blue-500 text-white rounded-2xl flex items-center justify-center text-xl mx-auto shadow-lg">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+
+            <h1 class="text-2xl font-bold tracking-tight text-gray-900">
+                Edit Event
+            </h1>
+
+            <p class="text-sm text-gray-400">
+                Perbarui informasi event yang sudah dibuat.
+            </p>
+
+        </div>
+
+        <!-- FORM EDIT -->
+
+        <form action="/event/update" method="post">
+
+            <!-- ID EVENT -->
+            <input type="hidden"
+                   name="id_event"
+                   th:value="${event.id_event}">
+
+            <!-- Nama Event -->
+            <div class="space-y-1.5">
+
+                <label class="text-xs font-bold uppercase tracking-wider text-gray-500">
+                    Nama Event
+                </label>
+
+                <div class="relative flex items-center">
+
+                    <i class="fa-solid fa-bullhorn absolute left-4 text-sm text-gray-400"></i>
+
+                    <input
+                            type="text"
+                            name="nama_event"
+                            required
+                            th:value="${event.nama_event}"
+                            class="w-full bg-gray-50 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:outline-none">
+
+                </div>
+
+            </div>
+
+            <!-- Lokasi -->
+
+            <div class="space-y-1.5">
+
+                <label class="text-xs font-bold uppercase tracking-wider text-gray-500">
+                    Lokasi Acara
+                </label>
+
+                <div class="relative flex items-center">
+
+                    <i class="fa-solid fa-map-location-dot absolute left-4 text-sm text-gray-400"></i>
+
+                    <input
+                            type="text"
+                            name="lokasi"
+                            required
+                            th:value="${event.lokasi}"
+                            class="w-full bg-gray-50 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:outline-none">
+
+                </div>
+
+            </div>
+
+            <!-- Maks Peserta + Status -->
+
+            <div class="grid grid-cols-2 gap-4">
+
+                <div class="space-y-1.5">
+
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">
+                        Maks Peserta
+                    </label>
+
+                    <div class="relative flex items-center">
+
+                        <i class="fa-solid fa-users absolute left-4 text-sm text-gray-400"></i>
+
+                        <input
+                                type="number"
+                                name="maks_peserta"
+                                th:value="${event.maks_peserta}"
+                                class="w-full bg-gray-50 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:outline-none">
+
+                    </div>
+
+                </div>
+
+                <div class="space-y-1.5">
+
+                    <label class="text-xs font-bold uppercase tracking-wider text-gray-500">
+                        Status
+                    </label>
+
+                    <div class="relative flex items-center">
+
+                        <i class="fa-solid fa-circle-info absolute left-4 text-sm text-gray-400"></i>
+
+                        <input
+                                type="text"
+                                name="status"
+                                th:value="${event.status}"
+                                class="w-full bg-gray-50 pl-11 pr-4 py-3 rounded-xl border border-gray-100 focus:border-amber-500 focus:outline-none">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Deskripsi -->
+
+            <div class="space-y-1.5">
+
+                <label class="text-xs font-bold uppercase tracking-wider text-gray-500">
+                    Deskripsi Event
+                </label>
+
+                <textarea
+                        name="deskripsi"
+                        rows="4"
+                        class="w-full bg-gray-50 p-4 rounded-xl border border-gray-100 focus:border-amber-500 focus:outline-none"
+                        th:text="${event.deskripsi}">
+                </textarea>
+
+            </div>
+
+            <!-- BUTTON -->
+
+            <button
+                    type="submit"
+                    class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3.5 rounded-xl font-bold transition-all">
+
+                <i class="fa-solid fa-floppy-disk mr-2"></i>
+                Update Event
+
+            </button>
+
+        </form>
+
+        <div class="text-center">
+
+            <a href="/event"
+               class="text-sm font-semibold text-gray-400 hover:text-gray-600">
+                Kembali ke Daftar Event
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

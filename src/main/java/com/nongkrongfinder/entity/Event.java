@@ -28,6 +28,8 @@ public class Event {
 
     private String status;
 
+    
+
     public Long getId_event() {
         return id_event;
     }

@@ -37,7 +37,7 @@
       <div
         class="hidden md:flex items-center gap-8 font-medium text-gray-600"
       >
-        <a href="/dashboard" class="text-amber-500 transition-colors">
+        <a href="/dashboard" class="hover:text-amber-500 transition-colors">
           Dashboard
         </a>
 
@@ -53,19 +53,45 @@
         <a
           th:if="${session.user != null}"
           href="/favorit"
-          class="hover:text-amber-500 transition-colors"
+          class="text-amber-500 transition-colors"
         >
           Favorit
         </a>
 
         <!-- Hanya Admin -->
-        <a
-          th:if="${session.role == 'ADMIN'}"
-          href="/admin/user"
-          class="hover:text-amber-500 transition-colors"
-        >
-          Kelola User
-        </a>
+        <div th:if="${session.role == 'ADMIN'}"
+        class="relative group">
+   
+       <button
+           class="hover:text-amber-500 transition-colors flex items-center gap-2">
+   
+           Kelola
+   
+           <i class="fa-solid fa-chevron-down text-xs"></i>
+   
+       </button>
+   
+       <div
+           class="absolute top-full left-0 w-52 bg-white rounded-xl shadow-lg border border-gray-100 hidden group-hover:block z-50">
+   
+           <a href="/admin/user"
+              class="block px-4 py-3 hover:bg-gray-50 text-sm">
+               👥 Kelola User
+           </a>
+   
+           <a href="/admin/tempat"
+              class="block px-4 py-3 hover:bg-gray-50 text-sm">
+               ☕ Kelola Tempat
+           </a>
+   
+           <a href="/admin/event"
+              class="block px-4 py-3 hover:bg-gray-50 text-sm">
+               🎉 Kelola Event
+           </a>
+   
+       </div>
+   
+   </div>
       </div>
 
       <!-- Tombol Kanan -->

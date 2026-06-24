@@ -57,4 +57,6 @@ public class Favorit {
     public void setTanggal_favorit(LocalDateTime tanggal_favorit) {
         this.tanggal_favorit = tanggal_favorit;
     }
+
+    
 }

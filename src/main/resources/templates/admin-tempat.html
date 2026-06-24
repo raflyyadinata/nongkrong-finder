@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kelola Tempat</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body class="bg-gray-50">
+
+<div class="max-w-7xl mx-auto p-8">
+
+
+<div class="flex justify-between items-center mb-8">
+
+    <div>
+        <h1 class="text-3xl font-bold">
+            ☕ Kelola Tempat
+        </h1>
+
+        <p class="text-gray-500">
+            Persetujuan tempat yang diajukan pengguna
+        </p>
+    </div>
+
+    <a href="/dashboard"
+       class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-3 rounded-xl">
+        Kembali
+    </a>
+
+</div>
+
+<div class="bg-white rounded-3xl shadow-sm overflow-hidden">
+
+    <table class="w-full">
+
+        <thead class="bg-gray-100">
+
+            <tr>
+                <th class="p-4 text-left">ID</th>
+                <th class="p-4 text-left">Nama Tempat</th>
+                <th class="p-4 text-left">Kategori</th>
+                <th class="p-4 text-left">Status</th>
+                <th class="p-4 text-center">Aksi</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr
+            th:each="tempat : ${tempatList}"
+            class="border-t">
+
+                <td class="p-4"
+                    th:text="${tempat.id_tempat}">
+                </td>
+
+                <td class="p-4"
+                    th:text="${tempat.nama_tempat}">
+                </td>
+
+                <td class="p-4"
+                    th:text="${tempat.kategori}">
+                </td>
+
+                <td class="p-4">
+
+                    <span
+                    th:if="${tempat.status == 'PENDING'}"
+                    class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold">
+                        PENDING
+                    </span>
+
+                    <span
+                    th:if="${tempat.status == 'APPROVED'}"
+                    class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">
+                        APPROVED
+                    </span>
+
+                    <span
+                    th:if="${tempat.status == 'REJECTED'}"
+                    class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold">
+                        REJECTED
+                    </span>
+
+                </td>
+
+                <td class="p-4">
+
+                    <div class="flex flex-wrap justify-center gap-2">
+
+                        <a
+                        th:href="@{'/tempat/detail/' + ${tempat.id_tempat}}"
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-lg text-xs">
+                            Detail
+                        </a>
+
+                        <a
+                        th:href="@{'/admin/tempat/approve/' + ${tempat.id_tempat}}"
+                        class="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-lg text-xs">
+                            Approve
+                        </a>
+
+                        <a
+                        th:href="@{'/admin/tempat/reject/' + ${tempat.id_tempat}}"
+                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-2 rounded-lg text-xs">
+                            Reject
+                        </a>
+
+                        <a
+                        th:href="@{'/tempat/hapus/' + ${tempat.id_tempat}}"
+                        onclick="return confirm('Hapus tempat ini?')"
+                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-xs">
+                            Hapus
+                        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+</div>
+
+</body>
+</html>

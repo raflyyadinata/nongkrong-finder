@@ -24,10 +24,13 @@ public class EventController {
     @Autowired
     private PesertaEventRepository pesertaEventRepository;
 
+    
+
     @GetMapping("/event")
     public String daftarEvent(Model model) {
 
-        List<Event> eventList = eventRepository.findAll();
+        List<Event> eventList =
+        eventRepository.findByStatus("APPROVED");
 
         model.addAttribute("eventList", eventList);
 
@@ -49,6 +52,8 @@ public class EventController {
         User user = (User) session.getAttribute("user");
 
         event.setUser(user);
+
+        event.setStatus("PENDING");
 
         eventRepository.save(event);
 
@@ -91,4 +96,90 @@ public class EventController {
 
         return "peserta-event";
     }
+
+    @GetMapping("/event/edit/{id}")
+public String formEditEvent(
+        @PathVariable Long id,
+        Model model
+) {
+
+    Event event = eventRepository
+            .findById(id)
+            .orElse(null);
+
+    model.addAttribute("event", event);
+
+    return "edit-event";
+}
+
+@PostMapping("/event/update")
+public String updateEvent(
+        @ModelAttribute Event event
+) {
+
+    eventRepository.save(event);
+
+    return "redirect:/event";
+}
+
+@GetMapping("/event/hapus/{id}")
+public String hapusEvent(@PathVariable Long id) {
+
+    pesertaEventRepository.deletePesertaByEventId(id);
+
+    eventRepository.deleteById(id);
+
+    return "redirect:/event";
+}
+
+@GetMapping("/admin/event")
+public String kelolaEvent(Model model) {
+
+    model.addAttribute(
+            "eventList",
+            eventRepository.findAll()
+    );
+
+    return "admin-event";
+}
+
+@GetMapping("/admin/event/approve/{id}")
+public String approveEvent(
+        @PathVariable Long id
+) {
+
+    Event event =
+            eventRepository.findById(id)
+            .orElse(null);
+
+    if(event != null){
+
+        event.setStatus("APPROVED");
+
+        eventRepository.save(event);
+    }
+
+    return "redirect:/admin/event";
+}
+
+@GetMapping("/admin/event/reject/{id}")
+public String rejectEvent(
+        @PathVariable Long id
+) {
+
+    Event event =
+            eventRepository.findById(id)
+            .orElse(null);
+
+    if(event != null){
+
+        event.setStatus("REJECTED");
+
+        eventRepository.save(event);
+    }
+
+    return "redirect:/admin/event";
+}
+
+
 }

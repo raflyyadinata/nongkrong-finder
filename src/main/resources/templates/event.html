@@ -1,170 +1,289 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Daftar Event - NongkrongFinder</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+      @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
     </style>
-</head>
-<body class="bg-gray-50 text-gray-900">
-
+  </head>
+  <body class="bg-gray-50 text-gray-900">
     <!-- NAVBAR -->
     <nav
-    class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100"
-  >
-    <div
-      class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center"
+      class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100"
     >
-      <!-- Logo -->
-      <div class="flex items-center gap-3">
-        <div
-          class="bg-amber-500 text-white p-2.5 rounded-xl shadow-lg shadow-amber-500/20"
-        >
-          <i class="fa-solid fa-mug-hot text-xl"></i>
-        </div>
-
-        <span class="text-xl font-bold tracking-tight text-gray-900">
-          Nongkrong<span class="text-amber-500">Finder</span>
-        </span>
-      </div>
-
-      <!-- Menu -->
       <div
-        class="hidden md:flex items-center gap-8 font-medium text-gray-600"
+        class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center"
       >
-        <a href="/dashboard" class="hover:text-amber-500 transition-colors">
-          Dashboard
-        </a>
-
-        <a href="/tempat" class="hover:text-amber-500 transition-colors">
-          Tempat
-        </a>
-
-        <a href="/event" class="text-amber-500 transition-colors">
-          Event
-        </a>
-
-        <!-- Hanya tampil jika sudah login -->
-        <a
-          th:if="${session.user != null}"
-          href="/favorit"
-          class="hover:text-amber-500 transition-colors"
-        >
-          Favorit
-        </a>
-
-        <!-- Hanya Admin -->
-        <a
-          th:if="${session.role == 'ADMIN'}"
-          href="/admin/user"
-          class="hover:text-amber-500 transition-colors"
-        >
-          Kelola User
-        </a>
-      </div>
-
-      <!-- Tombol Kanan -->
-      <div class="flex items-center gap-3">
-        <!-- Guest -->
-        <div th:if="${session.user == null}" class="flex gap-3">
-          <a
-            href="/login"
-            class="bg-amber-500 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-amber-600 transition-all text-sm"
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+          <div
+            class="bg-amber-500 text-white p-2.5 rounded-xl shadow-lg shadow-amber-500/20"
           >
-            Login
-          </a>
+            <i class="fa-solid fa-mug-hot text-xl"></i>
+          </div>
 
-          <a
-            href="/register"
-            class="border border-gray-300 px-5 py-2.5 rounded-xl font-semibold hover:bg-gray-100 transition-all text-sm"
-          >
-            Register
-          </a>
+          <span class="text-xl font-bold tracking-tight text-gray-900">
+            Nongkrong<span class="text-amber-500">Finder</span>
+          </span>
         </div>
 
-        <!-- User/Admin -->
-        <div th:if="${session.user != null}" class="flex items-center gap-3">
-          <span class="text-sm font-semibold text-gray-700">
-            <span th:text="${session.user.nama}"></span>
-          </span>
-
-          <span
-            th:if="${session.role == 'ADMIN'}"
-            class="bg-red-500 text-white text-xs px-2 py-1 rounded-full"
-          >
-            ADMIN
-          </span>
-
-          <a
-            href="/logout"
-            class="bg-gray-900 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-gray-800 transition-all text-sm"
-          >
-            Logout
+        <!-- Menu -->
+        <div
+          class="hidden md:flex items-center gap-8 font-medium text-gray-600"
+        >
+          <a href="/dashboard" class="hover:text-amber-500 transition-colors">
+            Dashboard
           </a>
+
+          <a href="/tempat" class="hover:text-amber-500 transition-colors">
+            Tempat
+          </a>
+
+          <a href="/event" class="text-amber-500 transition-colors">
+            Event
+          </a>
+
+          <!-- Hanya tampil jika sudah login -->
+          <a
+            th:if="${session.user != null}"
+            href="/favorit"
+            class="hover:text-amber-500 transition-colors"
+          >
+            Favorit
+          </a>
+
+          <!-- Hanya Admin -->
+          <div th:if="${session.role == 'ADMIN'}"
+          class="relative group">
+     
+         <button
+             class="hover:text-amber-500 transition-colors flex items-center gap-2">
+     
+             Kelola
+     
+             <i class="fa-solid fa-chevron-down text-xs"></i>
+     
+         </button>
+     
+         <div
+             class="absolute top-full left-0 w-52 bg-white rounded-xl shadow-lg border border-gray-100 hidden group-hover:block z-50">
+     
+             <a href="/admin/user"
+                class="block px-4 py-3 hover:bg-gray-50 text-sm">
+                 👥 Kelola User
+             </a>
+     
+             <a href="/admin/tempat"
+                class="block px-4 py-3 hover:bg-gray-50 text-sm">
+                 ☕ Kelola Tempat
+             </a>
+     
+             <a href="/admin/event"
+                class="block px-4 py-3 hover:bg-gray-50 text-sm">
+                 🎉 Kelola Event
+             </a>
+     
+         </div>
+     
+     </div>
+        </div>
+
+        <!-- Tombol Kanan -->
+        <div class="flex items-center gap-3">
+          <!-- Guest -->
+          <div th:if="${session.user == null}" class="flex gap-3">
+            <a
+              href="/login"
+              class="bg-amber-500 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-amber-600 transition-all text-sm"
+            >
+              Login
+            </a>
+
+            <a
+              href="/register"
+              class="border border-gray-300 px-5 py-2.5 rounded-xl font-semibold hover:bg-gray-100 transition-all text-sm"
+            >
+              Register
+            </a>
+          </div>
+
+          <!-- User/Admin -->
+          <div th:if="${session.user != null}" class="flex items-center gap-3">
+            <span class="text-sm font-semibold text-gray-700">
+              <span th:text="${session.user.nama}"></span>
+            </span>
+
+            <span
+              th:if="${session.role == 'ADMIN'}"
+              class="bg-red-500 text-white text-xs px-2 py-1 rounded-full"
+            >
+              ADMIN
+            </span>
+
+            <a
+              href="/logout"
+              class="bg-gray-900 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-gray-800 transition-all text-sm"
+            >
+              Logout
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
     <!-- CONTENT BODY -->
     <main class="max-w-5xl mx-auto px-4 py-10 space-y-8">
-        
-        <!-- HEADER HALAMAN -->
-        <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <!-- HEADER HALAMAN -->
+      <div
+        class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+      >
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900">
+            🎉 Daftar Event Nongkrong
+          </h1>
+          <p class="text-sm text-gray-500 mt-1">
+            Temukan, buat, atau ikuti keseruan event komunitas mingguan di
+            sekitarmu.
+          </p>
+        </div>
+        <a
+          th:if="${session.user != null}"
+          href="/event/tambah"
+          class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-3 rounded-xl font-semibold transition-all shadow-lg shadow-amber-500/20 text-sm flex items-center gap-2 shrink-0"
+        >
+          <i class="fa-solid fa-calendar-plus"></i>
+          Buat Event Baru
+        </a>
+      </div>
+
+      <!-- GRID LIST ACARA -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Loop Event -->
+        <div
+          th:each="event : ${eventList}"
+          class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex gap-5 items-start relative hover:shadow-md transition-shadow"
+        >
+          <!-- Badge Tanggal Kiri -->
+          <div
+            class="w-14 h-14 bg-amber-50 rounded-2xl flex flex-col items-center justify-center shrink-0 border border-amber-100 text-amber-600"
+          >
+            <span class="text-lg font-bold leading-none">28</span>
+            <span class="text-[10px] font-bold uppercase mt-1 tracking-wider"
+              >Jun</span
+            >
+          </div>
+
+          <!-- Detail Event -->
+          <div class="space-y-3 flex-1">
             <div>
-                <h1 class="text-2xl font-bold text-gray-900">🎉 Daftar Event Nongkrong</h1>
-                <p class="text-sm text-gray-500 mt-1">Temukan, buat, atau ikuti keseruan event komunitas mingguan di sekitarmu.</p>
+              <span
+                class="inline-block px-2.5 py-0.5 bg-emerald-50 text-emerald-700 rounded-lg text-[10px] font-bold uppercase tracking-wider mb-1.5"
+                th:text="${event.status}"
+                >Active</span
+              >
+              <h3
+                class="font-bold text-gray-900 text-lg leading-snug"
+                th:text="${event.nama_event}"
+              >
+                Nama Event
+              </h3>
             </div>
-            <a href="/event/tambah" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-3 rounded-xl font-semibold transition-all shadow-lg shadow-amber-500/20 text-sm flex items-center gap-2 shrink-0">
-                <i class="fa-solid fa-calendar-plus"></i> Buat Event Baru
-            </a>
-        </div>
 
-        <!-- GRID LIST ACARA -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Loop Event -->
-            <div th:each="event : ${eventList}" class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex gap-5 items-start relative hover:shadow-md transition-shadow">
-                
-                <!-- Badge Tanggal Kiri -->
-                <div class="w-14 h-14 bg-amber-50 rounded-2xl flex flex-col items-center justify-center shrink-0 border border-amber-100 text-amber-600">
-                    <span class="text-lg font-bold leading-none">28</span>
-                    <span class="text-[10px] font-bold uppercase mt-1 tracking-wider">Jun</span>
-                </div>
+            <p
+              class="text-sm text-gray-500 line-clamp-2"
+              th:text="${event.deskripsi}"
+            >
+              Deskripsi event disini...
+            </p>
 
-                <!-- Detail Event -->
-                <div class="space-y-3 flex-1">
-                    <div>
-                        <span class="inline-block px-2.5 py-0.5 bg-emerald-50 text-emerald-700 rounded-lg text-[10px] font-bold uppercase tracking-wider mb-1.5" th:text="${event.status}">Active</span>
-                        <h3 class="font-bold text-gray-900 text-lg leading-snug" th:text="${event.nama_event}">Nama Event</h3>
-                    </div>
-                    
-                    <p class="text-sm text-gray-500 line-clamp-2" th:text="${event.deskripsi}">Deskripsi event disini...</p>
-                    
-                    <div class="flex flex-wrap gap-y-2 gap-x-4 text-xs text-gray-400 font-medium pt-1">
-                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-amber-500"></i> <span th:text="${event.lokasi}">Lokasi</span></span>
-                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-users text-gray-400"></i> Max <span th:text="${event.maks_peserta}">-</span> Orang</span>
-                    </div>
-
-                    <!-- Tombol Join / Lihat Peserta -->
-                    <div class="pt-3 flex justify-between items-center border-t border-gray-50">
-                        <div class="flex gap-2">
-                            <a th:href="@{'/event/join/' + ${event.id_event}}" class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-xl text-xs font-bold transition-colors">
-                                <i class="fa-solid fa-right-to-bracket mr-1"></i> Join
-                            </a>
-                            <a th:href="@{'/event/peserta/' + ${event.id_event}}" class="bg-gray-100 hover:bg-gray-200 text-gray-600 px-4 py-2 rounded-xl text-xs font-bold transition-colors">
-                                <i class="fa-solid fa-user-group mr-1"></i> Peserta
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <div
+              class="flex flex-wrap gap-y-2 gap-x-4 text-xs text-gray-400 font-medium pt-1"
+            >
+              <span class="flex items-center gap-1.5"
+                ><i class="fa-solid fa-location-dot text-amber-500"></i>
+                <span th:text="${event.lokasi}">Lokasi</span></span
+              >
+              <span class="flex items-center gap-1.5"
+                ><i class="fa-solid fa-users text-gray-400"></i> Max
+                <span th:text="${event.maks_peserta}">-</span> Orang</span
+              >
             </div>
+
+            <!-- Tombol Join / Lihat Peserta -->
+
+            <div
+              class="pt-3 flex justify-between items-center border-t border-gray-50"
+            >
+              <!-- GUEST -->
+              <div th:if="${session.user == null}" class="flex gap-2">
+                <a
+                  th:href="@{'/event/peserta/' + ${event.id_event}}"
+                  class="bg-gray-100 hover:bg-gray-200 text-gray-600 px-4 py-2 rounded-xl text-xs font-bold transition-colors"
+                >
+                  <i class="fa-solid fa-user-group mr-1"></i>
+                  Peserta
+                </a>
+              </div>
+
+              <!-- USER -->
+              <div
+                th:if="${session.user != null and session.role != 'ADMIN'}"
+                class="flex gap-2"
+              >
+                <a
+                  th:href="@{'/event/join/' + ${event.id_event}}"
+                  class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-xl text-xs font-bold transition-colors"
+                >
+                  <i class="fa-solid fa-right-to-bracket mr-1"></i>
+                  Join
+                </a>
+
+                <a
+                  th:href="@{'/event/peserta/' + ${event.id_event}}"
+                  class="bg-gray-100 hover:bg-gray-200 text-gray-600 px-4 py-2 rounded-xl text-xs font-bold transition-colors"
+                >
+                  <i class="fa-solid fa-user-group mr-1"></i>
+                  Peserta
+                </a>
+              </div>
+
+              <!-- ADMIN -->
+              <div th:if="${session.role == 'ADMIN'}" class="flex gap-2">
+                <a
+                  th:href="@{'/event/edit/' + ${event.id_event}}"
+                  class="bg-blue-500 text-white px-3 py-2 rounded-lg"
+                >
+                  Edit
+                </a>
+
+                <a
+                  th:href="@{'/event/peserta/' + ${event.id_event}}"
+                  class="bg-gray-100 hover:bg-gray-200 text-gray-600 px-4 py-2 rounded-xl text-xs font-bold transition-colors"
+                >
+                  <i class="fa-solid fa-user-group mr-1"></i>
+                  Peserta
+                </a>
+
+                <a th:href="@{'/event/hapus/' + ${event.id_event}}"
+                onclick="return confirm('Yakin hapus event ini?')"
+                class="bg-red-500 text-white px-3 py-2 rounded-lg">
+                 Hapus
+             </a>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </main>
-
-</body>
+  </body>
 </html>

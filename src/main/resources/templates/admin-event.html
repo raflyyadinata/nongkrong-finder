@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kelola Event</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body class="bg-gray-50">
+
+<div class="max-w-7xl mx-auto p-8">
+
+    <div class="flex justify-between items-center mb-8">
+
+        <div>
+            <h1 class="text-3xl font-bold">
+                🎉 Kelola Event
+            </h1>
+
+            <p class="text-gray-500">
+                Persetujuan event yang diajukan pengguna
+            </p>
+        </div>
+
+        <a href="/dashboard"
+           class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-3 rounded-xl">
+            Kembali
+        </a>
+
+    </div>
+
+    <div class="bg-white rounded-3xl shadow-sm overflow-hidden">
+
+        <table class="w-full">
+
+            <thead class="bg-gray-100">
+
+                <tr>
+                    <th class="p-4 text-left">ID</th>
+                    <th class="p-4 text-left">Nama Event</th>
+                    <th class="p-4 text-left">Lokasi</th>
+                    <th class="p-4 text-left">Status</th>
+                    <th class="p-4 text-center">Aksi</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr
+                th:each="event : ${eventList}"
+                class="border-t">
+
+                    <td class="p-4"
+                        th:text="${event.id_event}">
+                    </td>
+
+                    <td class="p-4"
+                        th:text="${event.nama_event}">
+                    </td>
+
+                    <td class="p-4"
+                        th:text="${event.lokasi}">
+                    </td>
+
+                    <td class="p-4">
+
+                        <span
+                        th:if="${event.status == 'PENDING'}"
+                        class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold">
+                            PENDING
+                        </span>
+
+                        <span
+                        th:if="${event.status == 'APPROVED'}"
+                        class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">
+                            APPROVED
+                        </span>
+
+                        <span
+                        th:if="${event.status == 'REJECTED'}"
+                        class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold">
+                            REJECTED
+                        </span>
+
+                    </td>
+
+                    <td class="p-4">
+
+                        <div class="flex flex-wrap justify-center gap-2">
+
+                            <a
+                            th:href="@{'/event/peserta/' + ${event.id_event}}"
+                            class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-lg text-xs">
+                                Peserta
+                            </a>
+
+                            <a
+                            th:href="@{'/admin/event/approve/' + ${event.id_event}}"
+                            class="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-lg text-xs">
+                                Approve
+                            </a>
+
+                            <a
+                            th:href="@{'/admin/event/reject/' + ${event.id_event}}"
+                            class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-2 rounded-lg text-xs">
+                                Reject
+                            </a>
+
+                            <a
+                            th:href="@{'/event/hapus/' + ${event.id_event}}"
+                            onclick="return confirm('Hapus event ini?')"
+                            class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-xs">
+                                Hapus
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

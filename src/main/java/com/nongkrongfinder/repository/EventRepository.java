@@ -10,4 +10,8 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     List<Event> findByUser(User user);
 
+    List<Event> findByStatus(String status);
+
+    
+
 }

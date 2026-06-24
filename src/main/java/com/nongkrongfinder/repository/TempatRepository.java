@@ -18,5 +18,7 @@ public interface TempatRepository extends JpaRepository<Tempat, Long> {
            OR LOWER(t.deskripsi) LIKE LOWER(CONCAT('%', :keyword, '%'))
     """)
     List<Tempat> search(@Param("keyword") String keyword);
+    List<Tempat> findByStatus(String status);
+    
 
 }
